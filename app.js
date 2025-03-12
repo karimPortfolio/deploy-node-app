@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 configDotenv();
 
 const app = express();
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(express.static("public"));
@@ -22,17 +22,21 @@ const products = [
   { id: 6, name: "Product 6" },
 ];
 
-app.get("/api/v1/products", (req, res) => {
-  res.json(products);
-});
+const router = express.Router();
 
-app.get("/", (req, res) => {
+router.get("/api/v1/products", (req, res) => {
+  res.json(products);
+}); 
+
+router.get("", (req, res) => {
   res.render("index", {
     name: "Mohamed Karim Balla",
     title: "Home",
     products: products,
   });
 });
+
+app.use("/", router);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
