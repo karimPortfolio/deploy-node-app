@@ -14,7 +14,7 @@
     </div>
 
     <div class="grid grid-cols-3 gap-4 mt-10 px-5">
-      <% products.forEach( (product) => { %>
+      <% if (product && typeof product !== 'undefined') { %> <% products.forEach( (product) => { %>
       <div
         class="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
       >
@@ -60,7 +60,7 @@
           </a>
         </div>
       </div>
-      <% }) %>
+      <% }) %> <% } %>
     </div>
   </body>
 </html>
